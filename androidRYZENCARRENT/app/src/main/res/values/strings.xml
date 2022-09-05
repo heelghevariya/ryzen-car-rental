@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RYZEN CAR RENT</string>
+
+    <string name="otp_code_text">Co\nde</string>
+    <string name="otp_verification_text">Verification</string>
+    <string name="otp_description_text">Enter One Time Password Sent On \n Your Mail</string>
+
+    <string name="pass_text">New \n Credentials</string>
+    <string name="pass_description">Your Identity Has Been Verified!! \n Set Your New Password</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="required">Required</string>
+    <string name="sanitized_safe_car">Sanitised &amp; safe cars</string>
+    <string name="why_ryzen">Why Ryzen Cars?</string>
+    <string name="plp_bck">plp_bck</string>
+    <string name="home_bottom_msg">Best Ranting Services All Over The India</string>
+
+
+</resources>

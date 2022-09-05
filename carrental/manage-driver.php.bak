@@ -1,0 +1,219 @@
+<?php
+include 'includes/config.php';
+include 'includes/session.php';
+
+if(isset($_REQUEST['did']))
+{
+$did=intval($_GET['did']);
+$status="0";
+$result = mysqli_query($conn,"UPDATE tbl_driver SET status='".$status."' WHERE  d_id='".$did."'") or die(mysqli_error($conn));
+if($result==true)
+			{
+			$msg="Driver is now Inactive";
+			}
+			else
+			{
+				$error="something went wrong try again later";
+			}
+}
+
+
+if(isset($_REQUEST['adid']))
+{
+$adid=intval($_GET['adid']);
+$status=1;
+$result = mysqli_query($conn,"UPDATE tbl_driver SET status='".$status."' WHERE  d_id='".$adid."'") or die(mysqli_error($conn));
+if($result==true)
+			{
+			$msg="Driver is Now Successfully Active";
+			}
+			else
+			{
+				$error="something went wrong try again later";
+			}
+}
+
+	if(isset($_GET['del']))
+	{
+	$id=$_GET['del'];
+	$sql = mysqli_query($conn,"delete from tbl_driver WHERE d_id=$id") or die(mysqli_error($conn));
+	if($sql==true)
+			{
+			$msg="Driver Removed successfully";
+			}
+			else
+			{
+				$error="something went wrong try again later";
+
+			}
+
+	}
+ ?>
+
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="theme-color" content="#3e454c">
+	
+	<title>Car Rental Portal |Admin Manage Driver   </title>
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Sandstone Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Bootstrap Datatables -->
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	<!-- Bootstrap social button library -->
+	<link rel="stylesheet" href="css/bootstrap-social.css">
+	<!-- Bootstrap select -->
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+	<!-- Bootstrap file input -->
+	<link rel="stylesheet" href="css/fileinput.min.css">
+	<!-- Awesome Bootstrap checkbox -->
+	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<!-- Admin Stye -->
+	<link rel="stylesheet" href="css/style.css">
+  <style>
+		.errorWrap {
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #dd3d36;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.succWrap{
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #5cb85c;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+		</style>
+
+</head>
+
+<body>
+	<?php include('includes/header.php');?>
+
+	<div class="ts-main-content">
+		<?php include('includes/leftbar.php');?>
+		<div class="content-wrapper">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<h2 class="page-title">Manage Driver</h2>
+
+						<!-- Zero Configuration Table -->
+						<div class="panel panel-default">
+							<div class="panel-heading" style="background-color:#001662; color:white;">Drivers detail</div>
+							<div class="panel-body">
+							<?php if(isset($error)){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
+				else if(isset($msg)){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+										<th>#</th>
+											
+											<th>Driver Image</th>
+											<th>Driver Name</th>
+											<th>Email-Id</th>
+											<th>Mobile No</th>
+											<th>fees per day</th>
+											<th>Joining Date</th>											
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+										<th>#</th>
+											<th>Driver Image</th>
+											<th>Driver Name</th>
+											<th>Email-Id</th>
+											<th>Mobile No</th>
+											<th>fees per day</th>
+											<th>Joining Date</th>											
+											<th>Action</th>
+										</tr>
+										</tr>
+									</tfoot>
+									<tbody>
+
+<?php
+ $result =mysqli_query($conn,"SELECT * from tbl_driver")  or die(mysqli_error($conn));
+$cnt=1;
+		while($row=mysqli_fetch_assoc($result))
+		{
+?>
+
+										<tr>
+											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php if($row["photo"]=="")
+													{
+													echo "image unavailable";
+													} 
+														else {?>
+														<img src="img/driverimg/<?php echo $row["photo"];?>" width="80" height="100" style="border:solid 1px #000">
+														
+														<?php } ?>
+											</td>
+											<td><?php echo $row["fullname"];?></td>
+											<td><?php echo $row["emailid"];?></td>
+											<td><?php echo $row["mobile_no"];?></td>
+											<td><?php echo $row["driver_fees"];?></td>
+											<td><?php echo $row["joining_date"]?></td>
+												
+<td>
+<?php if($row['status']=="" || $row['status']==0)
+
+ { ?><a href="manage-driver.php?adid=<?php echo $row['d_id'];?>" onclick="return confirm('Do you really want to Active')"> Inactive</a>
+<?php } else {?>
+
+<a href="manage-driver.php?did=<?php echo $row['d_id'];?>" onclick="return confirm('Do you really want to Inactive')"> Active</a>
+
+<?php } ?>
+&nbsp <a href="edit-driver.php?id=<?php echo $row["d_id"];?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+<a href="manage-driver.php?del=<?php echo $row["d_id"];?>" onclick="return confirm('Do you want to remove this driver');"><i class="fa fa-close"></i></a>
+</td>
+										</tr>
+										<?php $cnt=$cnt+1; } ?>
+										
+									</tbody>
+								</table>
+
+						
+
+							</div>
+						</div>
+
+					
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Loading Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
+

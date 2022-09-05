@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_background"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/carlogo"
+        android:transitionName="logo_img" />
+
+    <TextView
+        android:id="@+id/ryzoncar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="RYZEN CAR RENT"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:transitionName="logo_name" />
+
+    <TextView
+        android:id="@+id/slogen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ryzoncar"
+        android:layout_centerHorizontal="true"
+        android:text="Different Cars For Rent"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_splash_building" />
+</RelativeLayout>

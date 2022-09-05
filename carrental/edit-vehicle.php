@@ -1,0 +1,588 @@
+<?php
+include 'includes/config.php';
+include 'includes/session.php';
+error_reporting(0);
+
+if(isset($_POST['submit']))
+  {
+	$vehicletitle=$_POST['vehicletitle'];
+	$brand=$_POST['brandname'];
+	$vehicleno=$_POST['vehicleno'];
+	$vehicledetail=$_POST['vehicledetail'];
+	$priceperday=$_POST['priceperday'];
+	$fueltype=$_POST['fueltype'];
+	$modelyear=$_POST['modelyear'];
+	$seatingcapacity=$_POST['seatingcapacity'];
+	$Airconditioner=$_POST['Airconditioner'];
+	$Childdoorlock=$_POST['Childdoorlock'];
+	$Brakeassiste=$_POST['Brakeassiste'];
+	$Driverairbage=$_POST['Driverairbage'];
+	$Passengerairbage=$_POST['Passengerairbage'];
+	$Powerwindow=$_POST['Powerwindow'];
+	$Smartgps=$_POST['Smartgps'];
+	$LEDdisplay=$_POST['LEDdisplay'];
+	$Airfreshner=$_POST['Airfreshner'];
+	$Auxcable=$_POST['Auxcable'];
+	$Dashcam=$_POST['Dashcam']; 
+	$id=intval($_GET['id']);
+
+
+$sql=mysqli_query($conn,"update tbl_vehicles set brand_id='".$brand."',vehicle_title='".$vehicletitle."',vehicle_no='".$vehicleno."',vehicle_detail='".$vehicledetail."',priceperday='".$priceperday."',fuel_type='".$fueltype."',model_year='".$modelyear."',seating_capacity='".$seatingcapacity."',Airconditioner='".$Airconditioner."',Childdoorlock='".$Childdoorlock."',Brakeassiste='".$Brakeassiste."',Driverairbage='".$Driverairbage."',Passengerairbage='".$Passengerairbage."',Powerwindow='".$Powerwindow."',Smartgps='".$Smartgps."',LEDdisplay='".$LEDdisplay."',Airfreshner='".$Airfreshner."',Auxcable='".$Auxcable."',Dashcam='".$Dashcam."' where vehicle_id='".$id."'") or die(mysqli_error($conn));
+	if($sql==true)
+	{
+		$msg="Vehicle Updated Successfully";
+			header("location:manage-vehicles.php");
+			}
+			else
+			{
+				$error="Something Went Wrong. Please Try Again";
+
+			}
+  }
+
+
+
+
+?>
+
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="theme-color" content="#3e454c">
+	
+	<title>Car Rental Portal | Admin Edit Vehicle Info</title>
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Sandstone Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Bootstrap Datatables -->
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	<!-- Bootstrap social button library -->
+	<link rel="stylesheet" href="css/bootstrap-social.css">
+	<!-- Bootstrap select -->
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+	<!-- Bootstrap file input -->
+	<link rel="stylesheet" href="css/fileinput.min.css">
+	<!-- Awesome Bootstrap checkbox -->
+	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<!-- Admin Stye -->
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.errorWrap {
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #dd3d36;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.succWrap{
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #5cb85c;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.error{
+
+  color:red;
+  width:100%;
+  margin-top:10px;
+  font-size:13px;
+  font-family:Corbel;  
+}
+		</style>
+</head>
+
+<body>
+	<?php include('includes/header.php');?>
+	<div class="ts-main-content">
+	<?php include('includes/leftbar.php');?>
+		<div class="content-wrapper">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-12">
+					
+						<h2 class="page-title">Edit Vehicle</h2>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading" style="background-color:#001662; color:white;">Basic Info</div>
+									<div class="panel-body">
+<?php if(isset($msg)){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
+<?php 
+$id=intval($_GET['id']);
+$result =mysqli_query($conn,"SELECT tbl_vehicles.*,tbl_brand.brand_name,tbl_brand.brand_id as bid from tbl_vehicles join tbl_brand on tbl_brand.brand_id=tbl_vehicles.brand_id where tbl_vehicles.vehicle_id=$id") or die(mysqli_error($conn));
+$cnt=1;
+while($row=mysqli_fetch_assoc($result))
+{
+?>
+
+<form method="post" id="frm" class="form-horizontal" enctype="multipart/form-data">
+<div class="form-group">
+<label class="col-sm-2 control-label">Vehicle Title<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="vehicletitle" class="form-control" value="<?php echo $row["vehicle_title"];?>" maxlength="25"  autocomplete="off">
+</div>
+<label class="col-sm-2 control-label">Select Brand<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<select class="selectpicker" name="brandname" required>
+<option value="<?php echo $row["bid"];?>"><?php echo $bdname=$row["brand_name"];?> </option>
+<?php $ret="select brand_id,brand_name from tbl_brand";
+
+while($data=mysqli_fetch_assoc($ret))
+{
+if($data["brand_name"]==$bdname)
+{
+continue;
+} else{
+?>
+<option value="<?php echo $data["brand_id"];?>"><?php echo $data["brand_name"];?></option>
+<?php }} ?>
+
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Vehicle number<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="vehicleno" id="vehicleno" class="form-control" maxlength="10" value="<?php echo $row["vehicle_no"];?>" autocomplete="off">
+<label id="aa"></label>
+</div>
+</div>
+											
+<div class="hr-dashed"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Vehicle Details<span style="color:red">*</span></label>
+<div class="col-sm-10">
+<textarea class="form-control" name="vehicledetail" rows="3" maxlength="350"  required><?php echo $row["vehicle_detail"];?></textarea>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Price Per Day(in INR)<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="priceperday" class="form-control" maxlength="7"  value="<?php echo $row["priceperday"];?>" autocomplete="off">
+</div>
+<label class="col-sm-2 control-label">Select Fuel Type<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<select class="selectpicker" name="fueltype" required>
+<option value="<?php echo $row["fuel_type"];?>"> <?php echo $row["fuel_type"];?> </option>
+
+<option value="Petrol">Petrol</option>
+<option value="Diesel">Diesel</option>
+<option value="CNG">CNG</option>
+</select>
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Model Year<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="modelyear" class="form-control" maxlength="4"  value="<?php echo $row["model_year"];?>" autocomplete="off">
+</div>
+<label class="col-sm-2 control-label">Seating Capacity<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="seatingcapacity" class="form-control" value="<?php echo $row["seating_capacity"];?>" autocomplete="off">
+</div>
+</div>
+<div class="hr-dashed"></div>								
+<div class="form-group">
+<div class="col-sm-12">
+<h4><b>Vehicle Images</b></h4>
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="col-sm-4">
+Image 1 <img src="img/vehicleimages/<?php echo $row["vimage1"];?>" width="300" height="200" style="border:solid 1px #000">
+<a href="changeimage1.php?imgid=<?php echo $row["vehicle_id"];?>">Change Image 1</a>
+</div>
+<div class="col-sm-4">
+Image 2<img src="img/vehicleimages/<?php echo $row["vimage2"];?>" width="300" height="200" style="border:solid 1px #000">
+<a href="changeimage2.php?imgid=<?php echo $row["vehicle_id"];?>">Change Image 2</a>
+</div>
+<div class="col-sm-4">
+Image 3<img src="img/vehicleimages/<?php echo $row["vimage3"];?>" width="300" height="200" style="border:solid 1px #000">
+<a href="changeimage3.php?imgid=<?php echo $row["vehicle_id"];?>">Change Image 3</a>
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="col-sm-4">
+Image 4
+<?php 
+if($row["vimage4"]=="")
+{
+	echo "image unavailable";
+} 
+	else {?>
+	<img src="img/vehicleimages/<?php echo $row["vimage4"];?>" width="300" height="200" style="border:solid 1px #000">
+	<a href="changeimage4.php?imgid=<?php echo $row["vehicle_id"];?>">Change Image 4</a>
+	<?php } ?>
+</div>
+
+<div class="col-sm-4">
+Image 5
+<?php if($row["vimage5"]=="")
+{
+echo "image unavailable";
+} 
+	else {?>
+	<img src="img/vehicleimages/<?php echo $row["vimage5"];?>" width="300" height="200" style="border:solid 1px #000">
+	<a href="changeimage5.php?imgid=<?php echo $row["vehicle_id"];?>">Change Image 5</a>
+	<?php } ?>
+</div>
+
+</div>
+<div class="hr-dashed"></div>									
+</div>
+</div>
+</div>
+</div>
+	
+							
+
+<div class="row">
+<div class="col-md-12">
+<div class="panel panel-default">
+<div class="panel-heading" style="background-color:#001662; color:white;">Accessories</div>
+<div class="panel-body">
+
+
+<div class="form-group">
+<div class="col-sm-3">
+<?php if($row["Airconditioner"]==1)
+{?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Airconditioner" checked value="1">
+<label for="inlineCheckbox1"> Air Conditioner </label>
+</div>
+<?php } else { ?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Airconditioner" value="1">
+<label for="inlineCheckbox1"> Air Conditioner </label>
+</div>
+<?php } ?>
+</div>
+<div class="col-sm-3">
+<?php if($row["Childdoorlock"]==1)
+{?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Childdoorlock" checked value="1">
+<label for="inlineCheckbox2"> Childdoor lock </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-success checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Childdoorlock" value="1">
+<label for="inlineCheckbox2"> Childdoor lock </label>
+</div>
+<?php }?>
+</div>
+<div class="col-sm-3">
+<?php if($row["Brakeassiste"]==1)
+{?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Brakeassiste" checked value="1">
+<label for="inlineCheckbox3"> Brakeassiste </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Brakeassiste" value="1">
+<label for="inlineCheckbox3"> Brakeassiste </label>
+</div>
+<?php } ?>
+</div>
+<div class="col-sm-3">
+<?php if($row["Driverairbage"]==1)
+{
+	?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Driverairbage" checked value="1">
+<label for="inlineCheckbox3"> Driver airbage </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Driverairbage" value="1">
+<label  for="inlineCheckbox3"> Driver airbage </label>
+</div>
+<?php } ?>
+</div>
+</div>
+<div><br></div>
+
+<div class="form-group">
+<div class="col-sm-3">
+<?php if($row["Passengerairbage"]==1)
+{
+	?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Passengerairbage" checked value="1">
+<label for="inlineCheckbox1"> Passenger airbage </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Passengerairbage" value="1">
+<label for="inlineCheckbox1"> Passenger airbage </label>
+</div>
+<?php } ?>
+</div>
+
+
+<div class="col-sm-3">
+<?php if($row["Powerwindow"]==1)
+{
+?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Powerwindow" checked value="1">
+<label for="inlineCheckbox2">Power window</label>
+</div>
+<?php } else { ?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Powerwindow" value="1">
+<label for="inlineCheckbox2">Power window</label>
+</div>
+<?php } ?>
+</div>
+
+<div class="col-sm-3">
+<?php if($row["Smartgps"]==1)
+{
+?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Smartgps" checked value="1">
+<label for="inlineCheckbox3"> SmartGPS </label>
+</div>
+<?php } else { ?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Smartgps" value="1">
+<label for="inlineCheckbox3"> SmartGPS </label>
+</div>
+<?php } ?>
+</div>
+
+<div class="col-sm-3">
+<?php if($row["LEDdisplay"]==1)
+{
+?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="LEDdisplay" checked value="1">
+<label for="inlineCheckbox3">LED display </label>
+</div>
+<?php } else { ?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="LEDdisplay" value="1">
+<label for="inlineCheckbox3"> LED display </label>
+</div>
+<?php } ?>
+</div>
+</div>
+<div><br></div>
+
+
+
+<div class="form-group">
+<div class="col-sm-3">
+<?php if($row["Airfreshner"]==1)
+{
+?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Airfreshner" checked value="1">
+<label for="inlineCheckbox1"> Airfreshner </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Airfreshner" value="1">
+<label for="inlineCheckbox1"> Airfreshner </label>
+</div>
+<?php } ?>
+</div>
+
+<div class="col-sm-3">
+<?php if($row["Auxcable"]==1)
+{
+?>
+<div class="checkbox  checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Auxcable" checked value="1">
+<label for="inlineCheckbox2">Auxcable</label>
+</div>
+<?php } else { ?>
+<div class="checkbox checkbox-success checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Auxcable" value="1">
+<label for="inlineCheckbox2">Auxcable</label>
+</div>
+<?php } ?>
+</div>
+
+
+<div class="col-sm-3">
+<?php if($row["Dashcam"]==1)
+{
+?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Dashcam" checked value="1">
+<label for="inlineCheckbox3"> Dashcam </label>
+</div>
+<?php } else {?>
+<div class="checkbox checkbox-inline">
+<input type="checkbox" id="inlineCheckbox1" name="Dashcam" value="1">
+<label for="inlineCheckbox3"> Dashcam </label>
+</div>
+<?php } ?>
+</div>
+</div>
+
+
+
+<?php } ?>
+
+
+											<div class="form-group">
+												<div class="col-sm-8 col-sm-offset-2" >
+													
+<button class="btn btn-primary" name="submit" id="submit" type="submit" style="margin-top:4%">Save changes</button>
+
+												</div>
+											</div>
+
+											</form>
+										</div>
+							
+							</div>	
+						</div>	
+						</div>					
+					</div>
+				</div>
+				
+			</div>	
+
+			</div>
+		</div>
+	
+
+	<!-- Loading Scripts -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+		
+<script type="text/javascript">
+$(function()	
+{	
+	$('#vehicleno').keyup(function(){
+		var vehicleno = $(this).val();
+		$.ajax({
+			url:'check.php',
+			method:"POST",
+			data:{vehiclen:vehicleno},
+			success:function(data)
+			{
+				if(data != '0')
+				{
+					$('#aa').html('<label class="error">Vehicle Number Already Exists</label>');
+					
+				}	
+				else
+				{
+					$('#aa').html('<span class="text-success"></span>');
+					
+				}
+			}
+		})
+		
+	});
+	
+
+});
+</script>
+
+<script type="text/javascript">
+	$.validator.addMethod("gj", function(value, element) {
+		return this.optional(element) || value == value.match(/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/);
+	},'Enter Valid Number');
+
+	$('#frm').validate({
+		rules:{	
+			vehicletitle:"required",
+			vehicleno:{
+				required:true,
+				gj:true
+			},	
+			vehicledetail:{
+				required:true,
+				minlength:20
+				
+			},		
+			priceperday:{
+				required:true,
+				digits:true,
+				min:100
+			},
+			modelyear:{
+				required:true,
+				digits:true,
+				range: [1950,2022]				
+			},
+			seatingcapacity:{
+				required:true,
+				digits:true,
+				range: [2,7]				
+			},
+			
+		},messages:{
+			vehicletitle:"Please Enter Vehicle Title",
+			vehicleno:{
+				required:"Please Enter Vehicle Number.",
+				gj:"Enter Vehicle Number In Valid Format (Ex:GJ05MHXXXX)"
+			},	
+			vehicledetail:{
+				required:"Please Enter Vehicle Details.",
+				minlength:"Atleast 20 Character Required"
+			},
+			brandname:"Please Enter Vehicle Brand",		
+			priceperday:{
+				required:"Please Enter Price-Per-Day.",
+				min:"Price-Per-Day Must Be Atleast 100",
+				digits:"Please Enter Digits Only"
+			},
+			modelyear:{
+				required:"Please Enter Model-Year Of  Vehicle.",
+				range:"Please Enter Model-Year Between 1950 To 2022.",
+				digits:"Please Enter Digits Only."
+			},
+			seatingcapacity:{
+				required:"Please Enter Seating Capacity OF Vehicle.",
+				range:"Please Enter Seating Capacity Between 2 To 7.",
+				digits:"Please Enter Digits Only."
+			},
+			
+		},
+		submitHandler:function(form){
+			form.submit();
+		}	
+	});
+</script>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

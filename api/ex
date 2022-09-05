@@ -1,0 +1,26 @@
+<?php
+
+include 'config.php';
+
+$a=time();
+
+
+// $result = mysqli_query($conn,"SELECT tbl_vehicles.*,tbl_brand.brand_name,tbl_brand.brand_id as bid from tbl_vehicles join tbl_brand on tbl_brand.brand_id=tbl_vehicles.brand_id") or die(mysqli_error($conn));
+$response=array();
+
+// $ct=mysqli_num_rows($result);
+
+// if($ct>0)
+// {
+// 	$output = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// 	echo json_encode($output);
+// }else
+// {
+
+		$response["status"]=$a
+		echo json_encode($response);	
+}
+//JSON
+
+?>
+

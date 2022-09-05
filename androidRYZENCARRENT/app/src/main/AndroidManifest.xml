@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ryzencarrent">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RYZENCARRENT"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".VisitorPanel.VisiterInquiryScreen"
+            android:exported="false" />
+        <activity
+            android:name=".VisitorPanel.VisiterVehicleDetails"
+            android:exported="false" />
+        <activity
+            android:name=".VisitorPanel.VisitorCarList"
+            android:exported="true" />
+        <activity
+            android:name=".VisitorPanel.VisiterDateSelection"
+            android:exported="false" />
+        <activity
+            android:name=".VisitorPanel.VisitorHomeScreen"
+            android:exported="false"
+
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".drawermenu.InvoiceDownloadScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.TermsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.ReviewNotAligableScreen"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.ViewRatingReviewScreen"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.ReviewRatingScreen"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.InquiryScreen"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.KYCPending"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.KYCConfirm"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.DrivingLicenseDetailScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.PanVerifyScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.AadhaarVerifyScreen"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".drawermenu.KYCScreen"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".drawermenu.BookedHistroyDetail"
+            android:exported="true" />
+        <activity
+            android:name=".drawermenu.BookingHistory"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.EmailChangeConfirm"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.EmailChangeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.ChangePasswordScreen"
+            android:exported="false" />
+        <activity
+            android:name=".drawermenu.MyProfileScreen"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.PaymentMethod"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreen.VehicleDetail"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.FiltersortActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.CarListScreen"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.UPIPayment"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.DateSelectionScreen"
+            android:exported="true" />
+        <activity
+            android:name=".EmailVerification"
+            android:exported="false" />
+        <activity
+            android:name=".EmailAuthentication"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreen.HomeScreen"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".PassChangeDone"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePassword"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".VerifyOTP"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".LoginScreen"
+            android:exported="true" />
+        <activity
+            android:name=".HomeScreen.BookingDetailsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

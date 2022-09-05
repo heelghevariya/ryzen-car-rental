@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_back"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_background"
+        android:orientation="vertical"
+        android:padding="@dimen/_20dp"
+        app:cardCornerRadius="2000dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56dp"
+            android:tooltipText="Search"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:padding="4dp"
+                android:src="@drawable/back_button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Review &amp; Rating"
+                android:textColor="@color/home_txt_sub_black"
+                android:textSize="24dp" />
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            android:layout_marginVertical="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_20dp"
+            app:cardCornerRadius="@dimen/_15dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/_15dp">
+
+                <RatingBar
+                    android:id="@+id/r_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:numStars="5"
+                    android:progressTint="#5EACCF"
+                    android:stepSize="1" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/messagel"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10dp"
+                    android:textColorHint="@color/black"
+                    android:transitionName="name"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Review..."
+                        android:padding="@dimen/_20dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:background="@drawable/shape_plp_book"
+            android:drawablePadding="@dimen/_10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20dp" />
+    </LinearLayout>
+
+</LinearLayout>

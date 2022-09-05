@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#0C0C0C</color>
+    <color name="purple_500">#80D8FF</color>
+    <color name="purple_700">#80D8FF</color>
+    <color name="teal_200">#80D8FF</color>
+    <color name="teal_700">#0479AE</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="app_back">#ececec</color>
+    <color name="tool_top">#1d93a7</color>
+    <color name="tool_bottom">#1c7fab</color>
+    <color name="text_black">#000000</color>
+    <color name="light_white">#f2f0f0</color>
+    <color name="Yellow">#FEB22F</color>
+    <color name="red">#FFFE2F40</color>
+    <color name="screen_background">#f1f4f8</color>
+    <color name="home_txt_sub_black">#d098a6b3</color>
+    <color name="txt_sub_black">#98a6b3</color>
+    <color name="light_gray">#FFF8F6F6</color>
+    <color name="txt_black_transparent_90">#90122232</color>
+    <color name="txt_theme">#1caba2</color>
+    <color name="view_bg_line">#e6ebf1</color>
+    <color name="txt_sub_light">#8098a6b3</color>
+    <color name="txt_small_color">#59646f</color>
+    <color name="exit_btn_color">#0C0C0C</color>
+
+    <color name="card1">#d4cbe5</color>
+    <color name="card2">#7adccf</color>
+    <color name="card3">#f7c59f</color>
+    <color name="card4">#b8d7f5</color>
+    <color name="card5">#F8F6F6</color>
+    <color name="card6">#c9e3db</color>
+    <color name="card7">#86d098</color>
+
+    <color name="enabled_color">#000</color>
+    <color name="disabled_color">#000</color>
+    <color name="green">#79C520</color>
+
+</resources>

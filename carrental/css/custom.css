@@ -1,0 +1,14 @@
+.modal-header{
+	background:black;
+	color:white;
+	font-family:Cambria;
+}
+.modal-body{
+	font-family:Cambria;
+}
+.modal-footer{
+	background:lightgrey;color:white;
+}
+#op{
+	color:black;
+}
